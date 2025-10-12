@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { obsidianApi, obsidianApi_detail } from '@/lib/obsidianApi'
 
 export function useObsidianNotes() {
   const [notes, setNotes] = useState<{ file: string; content: string }[]>([])
@@ -7,40 +7,55 @@ export function useObsidianNotes() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const ctrl = new AbortController()
+
     const fetchNotes = async () => {
       try {
-        // 1. 파일 리스트 요청
-        const listRes = await axios.get('/api/note')
-        const files: string[] = listRes.data.files
+        // 1) 파일 리스트: 이제는 /api 경유
+        const listRes = await obsidianApi.get('/vault/')
+        const files: string[] = Array.isArray(listRes.data?.files) ? listRes.data.files : []
 
-        // 2. .md 파일만 필터링
-        const mdFiles = files.filter((f) => f.endsWith('.md'));
-        // 3. 개별 파일 요청 (병렬)
-        const results = await Promise.all(
-          mdFiles.map(async (file) => {
-            try {
-              const res = await axios.get(`/api/note/${file}`)
-              console.log(res.data);
-              return { file, content: res.data.content }
-            } catch {
-              return { file, content: '⚠️ 불러오기 실패' }
-            }
+        // 3) 병렬로 파일 내용 가져오기 (개별 실패는 표시만)
+        const settled = await Promise.allSettled(
+          files.map(async (file) => {
+            const url = `/vault/${file}`
+            const res = await obsidianApi_detail.get(url)
+            return res ;
           })
         )
 
-        // 4. 결과 저장
+        const results = settled.map((s, idx) => {
+          if (s.status === 'fulfilled') {
+            // s.value is AxiosResponse
+            return {
+              file: files[idx],
+              content: s.value.data?.content ?? ''
+            }
+          } else {
+            return {
+              file: files[idx],
+              content: '⚠️ 불러오기 실패'
+            }
+          }
+        })
+
         setNotes(results)
-      } catch (err) {
-        setError('🚨 파일 리스트 불러오기 실패')
-        console.error(err)
+      } catch (err: any) {
+        // 서버에서 구조화된 에러가 오면 message를 표시
+        const msg =
+          err?.response?.data?.message ||
+          err?.message ||
+          '파일 리스트 불러오기 실패'
+        setError(`🚨 ${msg}`)
+        console.log('[useObsidianNotes] error:', err?.toJSON?.() ?? err)
       } finally {
         setLoading(false)
       }
     }
 
     fetchNotes()
+    return () => ctrl.abort()
   }, [])
 
   return { notes, error, loading }
 }
-

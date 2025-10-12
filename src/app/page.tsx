@@ -1,21 +1,18 @@
 'use client'
-import { useObsidianNotes } from '@/hooks/useObsidianNotes'
+import { useNotionApi } from '@/hooks/useNotionApi'
 
-export default function Home() {
-  const { notes, error, loading } = useObsidianNotes()
+export default function NotionPreview() {
+  const { notes, error, loading } = useNotionApi()
 
-  if (loading) return <div>⏳ 로딩 중...</div>
-  if (error) return <div>{error}</div>
+  if (loading) return <p>로딩 중...</p>
+  if (error) return <p>{error}</p>
 
   return (
-    <div>
-      {notes.map((note) => (
-        <div key={note.file}>
-          <h2>{note.file}</h2>
-          <pre>{note.content}</pre>
-        </div>
-      ))}
+    <div className="p-4">
+      <h2 className="font-bold text-lg mb-3">📄 Notion Database Info</h2>
+      <pre className="p-3 rounded-lg text-sm overflow-auto">
+        {JSON.stringify(notes, null, 2)}
+      </pre>
     </div>
   )
 }
-
