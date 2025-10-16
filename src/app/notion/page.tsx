@@ -24,7 +24,7 @@ return (
                   href={`/notion/${note.id}`}
                   className="text-blue-600 hover:underline"
                 >
-                {note.properties?.Name?.title?.[0]?.plain_text ?? '제목 없음'}
+                {note.properties?.title?.title?.[0]?.plain_text ?? '제목 없음'}
               </Link>
               <p className="font-semibold">
                 {note.properties?.type?.multi_select?.[0]?.name ?? '태그'}
