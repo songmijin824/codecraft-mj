@@ -1,4 +1,3 @@
-// 📂 src/utils/notionToMarkdown.ts
 
 type Block = {
   id: string
@@ -47,7 +46,7 @@ export function notionBlocksToMarkdown(blocks: Block[]): string {
 
         default:
           return `<!-- Unsupported block type: ${type} -->`
-      }
+      } 
     })
     .join('\n')
 }
