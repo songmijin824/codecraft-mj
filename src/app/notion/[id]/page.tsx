@@ -9,8 +9,6 @@ export default function NotionDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { page, blocks, loading, error } = useNotionDetail(id)
 
-
-
   if (loading) return <p>로딩 중...</p>
   if (error) return <p>{error}</p>
   if (!page) return <p>데이터 없음</p>
@@ -21,7 +19,9 @@ export default function NotionDetailPage() {
   return (
     <article className="p-6 prose max-w-none">
       <h1 className="text-2xl font-bold mb-4">{title}</h1>
-      <ReactMarkdown>{markdown}</ReactMarkdown>
+      <ReactMarkdown>
+        {markdown}
+      </ReactMarkdown>
     </article>
   )
 }
