@@ -15,7 +15,7 @@ export async function GET() {
     )
   }
   const body = {
-    sorts: [{ timestamp: 'created_time', direction: 'descending' }]
+    sorts: [{ timestamp: 'created_time', direction: 'ascending' }]
   }
   try {
     const res = await axios.post(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`,
