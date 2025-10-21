@@ -11,7 +11,7 @@ export function notionBlocksToMarkdown(blocks: Block[]): string {
       const { type } = block
       const value = block[type]
 
-      if (!value) return ''
+      if (!value) return '\n'
 
       switch (type) {
         case 'paragraph':
