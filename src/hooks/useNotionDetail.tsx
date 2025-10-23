@@ -19,7 +19,7 @@ export function useNotionDetail(pageId?: string) {
 
         // 2️⃣ 루트 블록 목록 가져오기
         const rootBlocks = res.data.blocks?.results ?? []
-
+        
         // 3️⃣ 각 블록의 children 재귀적으로 가져오기
         const fullBlocks = await Promise.all(
           rootBlocks.map(async (block: any) => {
