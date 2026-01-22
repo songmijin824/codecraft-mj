@@ -2,34 +2,35 @@ import { RenderBlock } from '@/utils/notionToMarkdown';
 import Link from 'next/link';
 import React from 'react';
 import clsx from 'clsx';
+import { Block, BlockType, CalloutBlockData, CodeBlockData, HeadingBlockData, ImageBlockData, ListItemBlockData, ParagraphBlockData, QuoteBlockData, TableBlockData, TextBlockProps, ToDoBlockData, ToggleBlockData, VideoBlockData } from './NotionBlocks.type';
 
-export const ParagraphBlock = ({ Block,BlockType,Blockdata }) => {
+
+export const ParagraphBlock = ({ Block,BlockType,Blockdata }: TextBlockProps<ParagraphBlockData>) => {
     return <TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata} Tag="div" className='leading-9'/>
-};
-
-export const Heading1Block = ({ Block,BlockType,Blockdata }) => {
+}
+export const Heading1Block = ({ Block,BlockType,Blockdata }: TextBlockProps<HeadingBlockData>) => {
     return <TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata} Tag="h1" className='leading-9' />
 }
-export const Heading2Block = ({ Block,BlockType,Blockdata }) => {
+export const Heading2Block = ({ Block,BlockType,Blockdata }: TextBlockProps<HeadingBlockData>) => {
   return <TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata} Tag="h2" className='leading-9' />
 }
-export const Heading3Block = ({ Block,BlockType,Blockdata }) => {
+export const Heading3Block = ({ Block,BlockType,Blockdata }: TextBlockProps<HeadingBlockData>) => {
   return <TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata} Tag="h4" className='leading-9'/>
 }
-export const BulletedListItemBlock = ({ Block,BlockType,Blockdata }) => {
+export const BulletedListItemBlock = ({ Block,BlockType,Blockdata }: TextBlockProps<ListItemBlockData>) => {
   return <TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata} Tag="span" TagClass='list-item ml-6 leading-7'/>
 }
-export const NumberedListItemBlock = ({ Block,BlockType,Blockdata }) => {
+export const NumberedListItemBlock = ({ Block,BlockType,Blockdata }: TextBlockProps<ListItemBlockData>) => {
   return <TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata} Tag="span" TagClass='list-item ml-6 leading-7' />
 }
-export const ToDoBlock = ({ Block,BlockType,Blockdata }) => {
+export const ToDoBlock = ({ Block,BlockType,Blockdata }: TextBlockProps<ToDoBlockData>) => {
   const checkbox = Blockdata.checked;
   return <div className="pl-4">
   <input type="checkbox" checked={checkbox} className="pointer-events-none" readOnly/>
   <TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata} Tag="span" className="inline-block pl-1 leading-7" />
   </div>
 }
-export const ToggleBlock = ({ Block,BlockType,Blockdata }) => {
+export const ToggleBlock = ({ Block,BlockType,Blockdata }: TextBlockProps<ToggleBlockData>) => {
   return <> 
     <details className='pl-4'>
       <summary>{Blockdata.rich_text[0].plain_text}</summary>
@@ -37,49 +38,49 @@ export const ToggleBlock = ({ Block,BlockType,Blockdata }) => {
     </details>
   </>
 }
-export const ImageBlock = ({ BlockType,Blockdata }) => {
+export const ImageBlock = ({ BlockType,Blockdata }: TextBlockProps<ImageBlockData>) => {
       const altText = Blockdata.caption.length > 0 ? Blockdata.caption[0].plain_text : "Notion Image";
       return <div data-type={BlockType}>
         <img src={Blockdata.file.url} alt={altText} />
       </div>
 }
-export const VideoBlock = ({ BlockType,Blockdata }) => {
+export const VideoBlock = ({ BlockType,Blockdata }: TextBlockProps<VideoBlockData>) => {
       return <div data-type={BlockType}>
         <video src={Blockdata.file.url}/>
       </div>
-}
-export const TableBlock = ({ Block,BlockType,Blockdata }) => {
+};
+export const TableBlock = ({ Block,BlockType,Blockdata }: TextBlockProps<TableBlockData>) => {
   console.log('TableBlock Blockdata:', Block);
     return (
     <div className="max-w-2xl mx-auto">
-      <TableRows rows={Block.children} />
+      <TableRows rows={Block?.children ?? []} />
     </div>
   )
-}
-export const CodeBlock = ({ Block,BlockType,Blockdata }) => {
+};
+export const CodeBlock = ({ Block,BlockType,Blockdata }: TextBlockProps<CodeBlockData>) => {
   return <pre>
       <code>
         <TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata} className='py-6 px-8 border-[1px] border-border bg-surface rounded-2xl my-2 mx-4 leading-5'/>
       </code>
     </pre>
-}
-export const CalloutBlock = ({ Block,BlockType,Blockdata }) => {
+};
+export const CalloutBlock = ({ Block,BlockType,Blockdata }: TextBlockProps<CalloutBlockData>) => {
   const Emoji = Blockdata.icon.emoji;
   return <div className='py-3 px-3 border-[1px] border-border bg-surface rounded-2xl mx-4 my-2'>
     {Emoji}<TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata}  className="inline-block pl-[5px] leading-7  "/>
   </div>
-}
-export const QuoteBlock = ({ Block,BlockType,Blockdata }) => {
+};
+export const QuoteBlock = ({ Block,BlockType,Blockdata }: TextBlockProps<QuoteBlockData>) => {
   return <blockquote className='py-3 px-3 border-l-[4px] border-text bg-surface mx-4 my-2'>
     <TextBlock Block={Block} BlockType={BlockType} Blockdata={Blockdata}  className=" "/>
   </blockquote>
-}
-export const DividerBlock = ({ Block,BlockType,Blockdata }) => {
+};
+export const DividerBlock = () => {
   return <hr className='border-white my-4 mx-4'/>
-}
-export const UnknownBlock = ({ Block,BlockType,Blockdata }) => {
-  return <></>
-}
+};
+export const UnknownBlock = () => {
+  return null
+};
 
 
 // 공통 텍스트 렌더링 컴포넌트 -> 링크 처리 포함
@@ -133,7 +134,8 @@ const BlockContent = ({ BlockText }: { BlockText: any[] }) => {
 
 
 // 공통 텍스트 렌더링 컴포넌트 -> 다양한 태그로 감싸기
-const TextBlock = ({ Block, BlockType, Blockdata, Tag = 'div', TagClass = '', className ='' }) => {
+const TextBlock = ({ Block, BlockType, Blockdata, Tag = 'div', TagClass = '', className ='' }
+  : { Block?: Block; BlockType: BlockType; Blockdata: any; Tag?: string; TagClass?: string; className?: string }) => {
   const BlockNum = Blockdata.rich_text.length;
   const BlockText = Blockdata.rich_text;
   const WrapperTag = Tag as any; 
@@ -150,7 +152,7 @@ const TextBlock = ({ Block, BlockType, Blockdata, Tag = 'div', TagClass = '', cl
         <BlockContent BlockText={BlockText} />
       </WrapperTag>
 
-      {Block.children?.length > 0 && (
+      {Block?.children && Block.children.length > 0 && (
         <>
           {Block.children.map((child: any) => (
             <RenderBlock key={child.id} block={child} />
