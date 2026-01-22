@@ -16,53 +16,55 @@ export function ProjectCard({ page }: ProjectCardProps) {
 
   console.log('ProjectCard Props:', { page, title, tags, file, descriptions, URL, github });
   return (
-    <article className="rounded-2xl border border-border p-4 hover:shadow-sm transition">
-      <h3 className="text-lg font-semibold mb-2">
-        {title}
-      </h3>
-        {
-          file === '#' ? ( 
-          <p className="text-sm text-gray-500 mb-4">이미지 없음</p> 
-          ) : ( 
-            <img src={file} alt={title} className="w-full h-auto mb-4 rounded-lg object-cover"/>
-          )
-        }
-      <div className="flex flex-wrap gap-2">
-        {tags.map(tag => (
-          <span
-            key={tag}
-            className="text-xs px-2 py-1 rounded-full bg-surface border border-border"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-      
-      <div className="flex flex-wrap gap-2">
-          <ul className="list-disc list-inside" >
-            {descriptions.map(des => (
-                <li key={des}>
-                  <span
-                    className="text-xs "
-                  >
-                    {des}
-                  </span>
-                </li>
-            ))}
-          </ul>
-      </div>
-      <div>
-        { URL !== '#' && 
-          <Link href={URL} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline mr-4">
-            프로젝트 링크
+    <article className="p-4 w-1/3">
+      <div className="rounded-2xl border border-border p-4 hover:shadow-sm  transition">
+        <h3 className="text-lg font-semibold mb-2">
+          {title}
+        </h3>
+          {
+            file === '#' ? ( 
+            <p className="text-sm text-gray-500 mb-4">이미지 없음</p> 
+            ) : ( 
+              <img src={file} alt={title} className="w-full h-auto mb-4 rounded-lg object-cover"/>
+            )
+          }
+        <div className="flex flex-wrap gap-2">
+          {tags.map(tag => (
+            <span
+              key={tag}
+              className="text-xs px-2 py-1 rounded-full bg-surface border border-border"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        
+        <div className="flex flex-wrap gap-2">
+            <ul className="list-disc list-inside" >
+              {descriptions.map(des => (
+                  <li key={des}>
+                    <span
+                      className="text-xs "
+                    >
+                      {des}
+                    </span>
+                  </li>
+              ))}
+            </ul>
+        </div>
+        <div>
+          { URL !== '#' && 
+            <Link href={URL} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline mr-4">
+              프로젝트 링크
+            </Link>
+          }
+          
+          { github !== '#' && 
+          <Link href={github} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+            GitHub
           </Link>
         }
-        
-        { github !== '#' && 
-        <Link href={github} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-          GitHub
-        </Link>
-      }
+        </div>
       </div>
     </article>
   )

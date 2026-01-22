@@ -26,9 +26,11 @@ return (
       {tabs.map(tab => (
         <button key={tab} className='px-2 py-1' onClick={() => setActiveTab(tab)}>{tab}</button>
       ))}
-      {activeTab && groupedNotes[activeTab as keyof typeof groupedNotes].map(page => (
-        <ProjectCard key={page.id} page={page} />
-      ))}
+      <div className="flex flex-wrap my-4">
+        {activeTab && groupedNotes[activeTab as keyof typeof groupedNotes].map(page => (
+          <ProjectCard key={page.id} page={page} />
+        ))}
+      </div>
     </div>
   )
 }
