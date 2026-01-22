@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import {
   ParagraphBlock,
   Heading1Block,
@@ -33,12 +33,12 @@ const BLOCK_RENDERERS: Record<string, (block: any) => JSX.Element> = {
   code: (b) => <CodeBlock Block={b} BlockType={b.type} Blockdata={b[b.type]} />,
   callout: (b) => <CalloutBlock Block={b} BlockType={b.type} Blockdata={b[b.type]} />,
   quote: (b) => <QuoteBlock Block={b} BlockType={b.type} Blockdata={b[b.type]} />,
-  divider: (b) => <DividerBlock Block={b} BlockType={b.type} Blockdata={b[b.type]} />,
+  divider: (b) => <DividerBlock />,
 }
 
 
 export function RenderBlock({ block }: { block: any }) {
   const Renderer = BLOCK_RENDERERS[block.type]
-  return Renderer ? Renderer(block) : <UnknownBlock block={block} />
+  return Renderer ? Renderer(block) : <UnknownBlock />
 }
 
