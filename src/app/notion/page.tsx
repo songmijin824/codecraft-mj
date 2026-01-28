@@ -1,28 +1,14 @@
-'use client'
-import { ProjectCard } from '@/components/ProjectCard'
-import { useNotionApi, useNotionProjectNotes, useNotionProjectNotesTabs } from '@/hooks/useNotionApi'
-import Link from 'next/link'
-import { useState } from 'react'
+import NotionPreviewClient from '@/components/NotionPreviewClient'
+import { mapNotionPageToNote } from '@/lib/mapNotionPageToNote'
+import { fetchNotionPages } from '@/lib/useNotionApi'
 
-export default function NotionPreview() {
+export const runtime = 'nodejs'
+export const revalidate = 600
 
-  const { projectNotes, loading,  error, } = useNotionProjectNotes('test')
+export default async function NotionPreview() {
+  const pages = await fetchNotionPages('')
 
-  if (loading) return <p>로딩 중...</p>
-  if (error) return <p>{error}</p>
+  const notes = pages.map(mapNotionPageToNote)
 
-return (
-    <div className="p-4">
-      <h2 className="font-bold text-lg mb-3">📄 Notion 데이터</h2>
-      <Link
-        href={`/notion`}
-        className="text-blue-600 hover:underline"
-      >노션페이지 바로가기 
-      </Link>
-      <br />
-      {projectNotes.map(page => (
-        <ProjectCard key={page.id} page={page} />
-      ))}
-    </div>
-  )
+  return <NotionPreviewClient initialNotes={notes} />
 }
