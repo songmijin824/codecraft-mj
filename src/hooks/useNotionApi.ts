@@ -61,11 +61,11 @@ export function useNotionProjectNotesTabs(tag: string) {
 
   const result = useMemo(() => {
     const grouped: Record<ProjectSubType, typeof notes> = {
-      PUBLISHING: [],
-      WEBDESIGN: [],
-      LOGO: [],
-      FRONTEND: [],
-      ETC: [],
+      'UI/UX': [],
+      Design: [],
+      Logo: [],
+      Frontend: [],
+      Etc: [],
     }
 
     notes.forEach(page => {

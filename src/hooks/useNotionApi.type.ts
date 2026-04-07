@@ -12,6 +12,7 @@ export interface NotionProperty {
   id: string
   type: string
   multi_select?: NotionMultiSelect[]
+  url?: string
 }
 
 export interface NotionPage {
@@ -25,6 +26,6 @@ export interface NotionResponse {
 }
 
 
-export const PROJECT_SUB_TYPES = ['PUBLISHING', 'WEBDESIGN', 'LOGO', 'FRONTEND', 'ETC'] as const
+export const PROJECT_SUB_TYPES = ['UI/UX', 'Design', 'Logo', 'Frontend', 'Etc'] as const
 
 export type ProjectSubType = typeof PROJECT_SUB_TYPES[number]

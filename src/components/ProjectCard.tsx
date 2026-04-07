@@ -30,12 +30,12 @@ export function ProjectCard({ page }: ProjectCardProps) {
           }
         <div className="flex flex-wrap gap-2">
           {tags.map(tag => (
-            <span
+            <button
               key={tag}
-              className="text-xs px-2 py-1 rounded-full bg-surface border border-border"
+              className="text-xs px-2 py-1 rounded-full bg-bg border border-border"
             >
               {tag}
-            </span>
+            </button>
           ))}
         </div>
         
@@ -44,7 +44,7 @@ export function ProjectCard({ page }: ProjectCardProps) {
               {descriptions.map(des => (
                   <li key={des}>
                     <span
-                      className="text-xs "
+                      className="text-xs"
                     >
                       {des}
                     </span>

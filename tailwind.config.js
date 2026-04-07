@@ -7,33 +7,49 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: "#F2E9E0",
+        bg: "var(--color-bg)",
         surface: "#F9F0E6",
         border: "#ffffff",
         text: "#080503",
         "text-muted": "#848484",
 
-        // block Text Colors
-        "block-gray": "#7E7A72",
-        "block-brown": "#835739",
-        "block-orange": "#E07C18",
-        "block-yellow": "#E0B711",
-        "block-green": "#3C965B",
-        "block-blue": "#139A9C",
-        "block-purple": "#5A56A4",
-        "block-pink": "#C56E6E",
-        "block-red": "#DB4E1E",
+        gray: {
+          700: "var(--color-gray-700)",
+          500: "var(--color-gray-500)",
+          300: "var(--color-gray-300)",
+          100: "var(--color-gray-100)",
+        },
 
-        // block Background Colors
-        "block-gray_background": "#D4CEC1",
-        "block-brown_background": "#B7825F",
-        "block-orange_background": "#F5A85B",
-        "block-yellow_background": "#FAEEBE",
-        "block-green_background": "#AAE4BE",
-        "block-blue_background": "#52C0C1",
-        "block-purple_background": "#A9A7CD",
-        "block-pink_background": "#F1C8C4",
-        "block-red_background": "#F58E6B",
+        primary: {
+          700: "var(--color-primary-green-700)",
+          300: "var(--color-primary-green-300)",
+          100: "var(--color-primary-green-100)",
+        },
+
+        // block Text Colors
+        secondary: {
+          gray: "var(--color-secondary-gray)",
+          brown: "var(--color-secondary-brown)",
+          orange: "var(--color-secondary-orange)",
+          yellow: "var(--color-secondary-yellow)",
+          green: "var(--color-secondary-green)",
+          blue: "var(--color-secondary-blue)",
+          purple: "var(--color-secondary-purple)",
+          pink: "var(--color-secondary-pink)",
+          red: "var(--color-secondary-red)",
+        },
+
+        "bg-secondary": {
+          gray: "var(--color-secondary-gray)",
+          brown: "var(--color-secondary-brown)",
+          orange: "var(--color-secondary-orange)",
+          yellow: "var(--color-secondary-yellow)",
+          green: "var(--color-secondary-green)",
+          blue: "var(--color-secondary-blue)",
+          purple: "var(--color-secondary-purple)",
+          pink: "var(--color-secondary-pink)",
+          red: "var(--color-secondary-red)",
+        },
       },
     },
   },
@@ -42,11 +58,11 @@ module.exports = {
     // Tailwind가 해당 패턴의 모든 클래스를 강제로 포함시켜 줍니다.
     {
       pattern:
-        /text-block-(gray|brown|orange|yellow|green|blue|purple|pink|red)/,
+        /secondary-(gray|brown|orange|yellow|green|blue|purple|pink|red)/,
     },
     {
       pattern:
-        /bg-block-(gray|brown|orange|yellow|green|blue|purple|pink|red)_background/,
+        /bg-secondary-(gray|brown|orange|yellow|green|blue|purple|pink|red)/,
     },
   ],
   plugins: [],

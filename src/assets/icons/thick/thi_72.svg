@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="모양_3" data-name="모양 3" class="cls-1" d="M72.843,47.235L31.676,6.136a3.9,3.9,0,0,0-5.526,5.517l38.4,38.34-38.4,38.34a3.9,3.9,0,0,0,5.526,5.517l41.167-41.1A3.9,3.9,0,0,0,72.843,47.235Z"/>
+</svg>

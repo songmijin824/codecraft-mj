@@ -4,6 +4,12 @@ import { useParams } from 'next/navigation'
 import { useNotionDetail } from '@/hooks/useNotionDetail'
 import { RenderBlock } from '@/utils/notionToMarkdown'
 
+// export async function generateMetadata({ params }) {
+//   return {
+//     title: `${project.title} | 송미진`,
+//     description: project.description,
+//   }
+// }
 
 export default function NotionDetailPage() {
   const { id } = useParams<{ id: string }>()
