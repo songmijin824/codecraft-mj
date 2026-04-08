@@ -1,0 +1,27 @@
+
+.iconContainer {
+  position:absolute;
+  top:-40px;
+  right:30px;
+  padding:15px 0;
+  width:90px;
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-color);
+  border-radius: 19px;
+  z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  .icon{
+    height: 33px;
+    margin-bottom:5px;
+
+    img{
+      height: 100%;
+    }
+  }
+  .typeName {
+    font-weight: 700;
+    font-size: 15px;
+  }
+}

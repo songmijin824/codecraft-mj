@@ -1,6 +1,6 @@
 'use client'
 
-import { ProjectCard } from '@/components/ProjectCard'
+import { ProjectCard } from '@/components/ProjectCard/ProjectCard'
 import {  useNotionProjectNotesTabs } from '@/hooks/useNotionApi'
 import Link from 'next/link'
 import { useState } from 'react'

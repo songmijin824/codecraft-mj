@@ -61,7 +61,7 @@ export function useNotionProjectNotesTabs(tag: string) {
 
   const result = useMemo(() => {
     const grouped: Record<ProjectSubType, typeof notes> = {
-      'UI/UX': [],
+      'UIUX': [],
       Design: [],
       Logo: [],
       Frontend: [],
