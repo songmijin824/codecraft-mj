@@ -1,5 +1,6 @@
 'use client'
 
+import { Buttons } from '@/components/Buttons/Buttons'
 import { ProjectCard } from '@/components/ProjectCard/ProjectCard'
 import {  useNotionProjectNotesTabs } from '@/hooks/useNotionApi'
 import Link from 'next/link'
@@ -13,7 +14,6 @@ export default function NotionPreview() {
   if (loading) return <p>로딩 중...</p>
   if (error) return <p>{error}</p>
 
-  console.log('Notion Notes:', groupedNotes, activeTab);
 return (
     <div className="p-4">
       <h2 className="font-bold text-[60px] mb-3">📄 Notion 데이터</h2>

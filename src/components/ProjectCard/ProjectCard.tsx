@@ -21,9 +21,9 @@ export function ProjectCard({ page }: ProjectCardProps) {
   console.log('ProjectCard Props:', { page, title, tags, file, descriptions, URL, github }, { type});
   return (
     <article className={styles.projectCard}>
-      <div className={styles.hiddenBox}></div>
       <LayerBox className={styles.styleBox} typeNumber={26}>
         <div className={styles.imageContainer}>
+          <div className={styles.hiddenBox}></div>
           {
             file === '#' ? ( 
             <p className={styles.noImage}>이미지 없음</p> 

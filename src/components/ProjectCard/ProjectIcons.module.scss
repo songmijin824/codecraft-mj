@@ -6,7 +6,7 @@
   padding:15px 0;
   width:90px;
   background-color: var(--color-bg);
-  box-shadow: var(--shadow-color);
+  box-shadow: var(--shadow-color-300);
   border-radius: 19px;
   z-index: 10;
     display: flex;
@@ -15,7 +15,6 @@
   .icon{
     height: 33px;
     margin-bottom:5px;
-
     img{
       height: 100%;
     }
