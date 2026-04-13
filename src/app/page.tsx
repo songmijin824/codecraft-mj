@@ -1,7 +1,9 @@
 'use client'
 
-import { Buttons } from '@/components/Buttons/Buttons'
 import { ProjectCard } from '@/components/ProjectCard/ProjectCard'
+import { SnsButton } from '@/components/SnsButton/SnsButton'
+import { StackBar } from '@/components/StackBar/StackBar'
+import { Taps } from '@/components/Taps/Taps'
 import {  useNotionProjectNotesTabs } from '@/hooks/useNotionApi'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -13,7 +15,7 @@ export default function NotionPreview() {
 
   if (loading) return <p>로딩 중...</p>
   if (error) return <p>{error}</p>
-
+  
 return (
     <div className="p-4">
       <h2 className="font-bold text-[60px] mb-3">📄 Notion 데이터</h2>
@@ -23,9 +25,8 @@ return (
       >노션페이지 바로가기 
       </Link>
       <br />
-      {tabs?.map(tab => (
-        <button key={tab} className='px-2 py-1' onClick={() => setActiveTab(tab)}>{tab}</button>
-      ))}
+      <Taps TapList={tabs} activeTab={activeTab} setActiveTab={setActiveTab} className="my-4" />
+
       <div className="flex flex-wrap my-4">
         {activeTab && groupedNotes[activeTab as keyof typeof groupedNotes].map(page => (
           <ProjectCard key={page.id} page={page} />

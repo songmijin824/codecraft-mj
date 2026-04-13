@@ -2,7 +2,7 @@
 import styles from  "./LayerBox.module.scss";
 
 type Props = {
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
   typeNumber?: number
 }

@@ -26,6 +26,6 @@ export interface NotionResponse {
 }
 
 
-export const PROJECT_SUB_TYPES = ['UIUX', 'Design', 'Logo', 'Frontend', 'Etc'] as const
+export const PROJECT_SUB_TYPES = ['ALL','UIUX', 'Design', 'Logo', 'Frontend', 'Etc'] as const
 
 export type ProjectSubType = typeof PROJECT_SUB_TYPES[number]

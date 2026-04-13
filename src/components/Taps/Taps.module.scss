@@ -1,0 +1,63 @@
+
+
+.taps {
+    display: flex;
+    margin-bottom: 16px;
+    position:relative;
+    width: fit-content;
+  .tap{
+    padding:7px 20px;
+    background-color: transparent;
+    color: var(--color-gray-500);
+    font-weight: 300;
+    font-size: 21px;
+    &.active {
+      font-weight: 700;
+      color: var(--color-primary-green-700);
+    }
+    z-index: 1;
+  }
+  .grassBox{
+    position:absolute;
+    top:0;
+    left:0;
+    width: 0px;
+    height: 100%;
+    z-index: -1;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .activeIndicator{
+    font-size:0;
+    z-index: -1;
+  }
+  .movement{
+    animation: jelly 0.6s both;
+  }
+}
+
+@keyframes jelly {
+  0% {
+    transform: scale(1, 1);
+  }
+  30% {
+    /* 양옆으로 살짝 퍼졌다가 위로 솟구치는 느낌 */
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    /* 위아래로 길게 늘어남 (최대 크기) */
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    /* 다시 반동 */
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}

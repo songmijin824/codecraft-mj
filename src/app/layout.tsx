@@ -7,7 +7,7 @@ import { Comfortaa, IBM_Plex_Sans_KR } from 'next/font/google'
 
 const comfortaa = Comfortaa({
   subsets: ['latin'],
-  weight: ['700'],
+  weight: ['300', '700'],
   variable: '--font-comfortaa',
 })
 

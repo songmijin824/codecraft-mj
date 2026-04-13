@@ -18,7 +18,7 @@ export function ProjectCard({ page }: ProjectCardProps) {
   const github = page.properties['git']?.url || '#'
   const type = page.properties['type']?.multi_select?.[1]?.name || undefined
 
-  console.log('ProjectCard Props:', { page, title, tags, file, descriptions, URL, github }, { type});
+  // console.log('ProjectCard Props:', { page, title, tags, file, descriptions, URL, github }, { type});
   return (
     <article className={styles.projectCard}>
       <LayerBox className={styles.styleBox} typeNumber={26}>

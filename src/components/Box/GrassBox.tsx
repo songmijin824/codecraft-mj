@@ -3,7 +3,7 @@
 import styles from  "./GrassBox.module.scss";
 
 type Props = {
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
   typeNumber?: number
 }

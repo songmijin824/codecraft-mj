@@ -61,6 +61,7 @@ export function useNotionProjectNotesTabs(tag: string) {
 
   const result = useMemo(() => {
     const grouped: Record<ProjectSubType, typeof notes> = {
+      ALL: [],
       'UIUX': [],
       Design: [],
       Logo: [],
@@ -82,17 +83,19 @@ export function useNotionProjectNotesTabs(tag: string) {
       // console.log('Page Multi-Selects:', multiSelectProp.multi_select);
       if (!hasProject) return
 
+      grouped['ALL'].push(page)
+      
       // PROJECT 제외한 서브 타입
       const subType = multiSelectProp.multi_select.find(
         t => t.name !== tag
-      )?.name as ProjectSubType | undefined
+      )?.name as keyof typeof grouped | undefined
 
       // 🚨 화이트리스트에 없는 타입은 버림
-      if (!subType || !PROJECT_SUB_TYPES.includes(subType)) return
-
-      grouped[subType].push(page)
+      // 해당 서브 타입 그룹에도 추가 (유효한 타입인 경우만)
+      if (subType && grouped[subType] && subType !== 'ALL') {
+        grouped[subType].push(page)
+      }
     })
-
     return {
       tabs: PROJECT_SUB_TYPES,
       groupedNotes: grouped,
